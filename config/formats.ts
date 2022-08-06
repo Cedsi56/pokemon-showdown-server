@@ -17,7 +17,34 @@ New sections will be added to the bottom of the specified column.
 The column value will be ignored for repeat sections.
 */
 
-export const Formats: FormatList = [
+let Formats: FormatList = [
+
+	{
+		section: "Crystal Clear",
+	},
+	{
+		name: "[Gen 2] Pigyournament",
+
+		mod: 'cc',
+
+		ruleset: ['Sleep Clause Mod', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
+		banlist: ['Uber',  'Rest', 'Mean Look', 'Brightpowder'],
+	},
+	{
+		name: "[Gen 2] Pigyournament 6v6 (Unoffical)",
+
+		mod: 'cc',
+		ruleset: ['Sleep Clause Mod', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50'],
+		banlist: ['Uber', 'Rest', 'Mean Look', 'Brightpowder'],
+	},
+
+{
+		name: "[Gen 2] CC LC Beta (Unoffical)",
+	
+		mod: 'cc',
+		ruleset: ['Team Preview', 'Little Cup', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 5'],
+		banlist: ['Gligar', 'Misdreavus', 'Scyther', 'Sneasel', 'Tangela', 'Chansey', 'Gold Berry', 'Abra', 'Houndour' , 'Dragon Rage', 'Sonic Boom'],
+	},
 
 	// Sw/Sh Singles
 	///////////////////////////////////////////////////////////////////
@@ -3899,3 +3926,6 @@ export const Formats: FormatList = [
 		ruleset: ['HP Percentage Mod', 'Cancel Mod', 'Desync Clause Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
 	},
 ];
+
+
+exports.Formats = Formats;
