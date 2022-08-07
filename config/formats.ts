@@ -25,24 +25,24 @@ let Formats: FormatList = [
 	{
 		name: "[Gen 2] Pigyournament",
 
-		mod: 'cc',
+		mod: 'gen2pigyournament',
 
-		ruleset: ['Sleep Clause Mod', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
+		ruleset: ['Sleep Clause Mod', 'Obtainable', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
 		banlist: ['Uber',  'Rest', 'Mean Look', 'Brightpowder'],
 	},
 	{
 		name: "[Gen 2] Pigyournament 6v6 (Unoffical)",
 
-		mod: 'cc',
-		ruleset: ['Sleep Clause Mod', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50'],
+		mod: 'gen2pigyournament',
+		ruleset: ['Sleep Clause Mod', 'Obtainable', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50'],
 		banlist: ['Uber', 'Rest', 'Mean Look', 'Brightpowder'],
 	},
 
 {
 		name: "[Gen 2] CC LC Beta (Unoffical)",
 	
-		mod: 'cc',
-		ruleset: ['Team Preview', 'Little Cup', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 5'],
+		mod: 'gen2pigyournament',
+		ruleset: ['Team Preview', 'Obtainable', 'Little Cup', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 5'],
 		banlist: ['Gligar', 'Misdreavus', 'Scyther', 'Sneasel', 'Tangela', 'Chansey', 'Gold Berry', 'Abra', 'Houndour' , 'Dragon Rage', 'Sonic Boom'],
 	},
 

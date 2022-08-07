@@ -351,11 +351,6 @@ class Ladder extends LadderStore {
 		// users must have different IPs
 		if (new Set(users.map(user => user.latestIp)).size !== users.length) return false;
 
-		// users must not have been matched immediately previously
-		for (const user of users) {
-			if (userids.includes(user.lastMatch)) return false;
-		}
-
 		// search must be within range
 		let searchRange = 100;
 		const times = matches.map(([search]) => search.time);
