@@ -38,15 +38,22 @@ let Formats: FormatList = [
 		],
 	},
 	{
-		name: "[Gen 2] Pigyournament 6v6 (Unoffical)",
+		name: "[Gen 2] Pigyournament 6v6",
 
 		mod: 'gen2pigyournament',
 		ruleset: ['Sleep Clause Mod', 'Obtainable', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50'],
-		banlist: ['Uber', 'Rest', 'Mean Look', 'Brightpowder'],
+		banlist: [
+			// Tier
+			'Uber',
+			// Moves
+			'Rest', 'Sing', 'Spore', 'Hypnosis', 'Sleep Powder', 'Lovely Kiss', 'Mean Look',
+			// Items
+			'Brightpowder'
+		],
 	},
 
 {
-		name: "[Gen 2] Pigyournament LC Beta (Unoffical)",
+		name: "[Gen 2] Pigyournament LC Beta",
 	
 		mod: 'gen2pigyournament',
 		ruleset: ['Team Preview', 'Obtainable', 'Little Cup', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 5'],
