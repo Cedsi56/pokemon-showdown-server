@@ -3207,6 +3207,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		toxic: ["2T"],
 	}},
 	primeape: {learnset: {
+		bellydrum: ["2T"],
 		boneclub: ["2T"],
 		painsplit: ["2T"],
 		metalclaw: ["2T"],
@@ -3493,6 +3494,8 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		whirlpool: ["2T"],
 	}},
 	poliwrath: {learnset: {
+		machpunch: ["2T"],
+		karatechop: ["2T"],
 		aurorabeam: ["2T"],
 		encore: ["2T"],
 		psybeam: ["2T"],
@@ -5986,6 +5989,9 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		toxic: ["2T"],
 	}},
 	hitmonlee: {learnset: {
+		swordsdance: ["2T"],
+		bellydrum: ["2T"],
+		lowkick: ["2T"],
 		earthquake: ["2T"],
 		rockslide: ["2T"],
 		mirrormove: ["2T"],
@@ -6038,6 +6044,9 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		toxic: ["2T"],
 	}},
 	hitmonchan: {learnset: {
+		bellydrum: ["2T"],
+		safeguard: ["2T"],
+		batonpass: ["2T"],
 		earthquake: ["2T"],
 		swordsdance: ["2T"],
 		crosschop: ["2T"],
@@ -6098,6 +6107,12 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		toxic: ["2T"],
 	}},
 	hitmontop: {learnset: {
+		bellydrum: ["2T"],
+		rockslide: ["2T"],
+		crosschop: ["2T"],
+		drillpeck: ["2T"],
+		extremespeed: ["2T"],
+		megahorn: ["2T"], // this guy be getting a lot of shit lmao
 		earthquake: ["2T"],
 		flamewheel: ["2T"],
 		firespin: ["2T"],
@@ -6913,6 +6928,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		watergun: ["2T"],
 	}},
 	seaking: {learnset: {
+		bellydrum: ["2T"], // oh fuck
 		lovelykiss: ["2T"],
 		sweetkiss: ["2T"],
 		megahorn: ["2T"],
@@ -7538,6 +7554,8 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		toxic: ["2T"],
 	}},
 	pinsir: {learnset: {
+		wingattack: ["2T"],
+		glare: ["2T"],
 		dig: ["2T"],
 		earthquake: ["2T"],
 		falseswipe: ["2T"],
@@ -8442,7 +8460,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 	}},
 	aerodactyl: {learnset: {
 		eggbomb: ["2T"],
-		rockslide: ["2T"],
+		// rip bozo rockslide: ["2T"],
 		outrage: ["2T"],
 		falseswipe: ["2T"],
 		strength: ["2T"],
@@ -10873,6 +10891,8 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		toxic: ["2T"],
 	}},
 	yanma: {learnset: {
+		outrage: ["2T"],
+		dragonbreath: ["2T"],
 		ancientpower: ["2T"],
 		extremespeed: ["2T"],
 		faintattack: ["2T"],
@@ -11257,6 +11277,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		safeguard: ["2T"],
 	}},
 	girafarig: {learnset: {
+		confuseray: ["2T"],
 		pursuit: ["2T"],
 		highjumpkick: ["2T"],
 		barrier: ["2T"],
@@ -11364,6 +11385,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		toxic: ["2T"],
 	}},
 	forretress: {learnset: {
+		psychup: ["2T"],
 		zapcannon: ["2T"],
 		lightscreen: ["2T"],
 		clamp: ["2T"],
@@ -11783,7 +11805,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		crosschop: ["2T"],
 		karatechop: ["2T"],
 		raindance: ["2T"],
-		rockslide: ["2T"],
+		// lmao get fucked rockslide: ["2T"],
 		vitalthrow: ["2T"],
 		falseswipe: ["2T"],
 		meditate: ["2T"],
@@ -12327,6 +12349,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		whirlpool: ["2T"],
 	}},
 	delibird: {learnset: {
+		bellydrum: ["2T"], // FEAR THE BIRD
 		eggbomb: ["2T"],
 		drillpeck: ["2T"],
 		explosion: ["2T"],
