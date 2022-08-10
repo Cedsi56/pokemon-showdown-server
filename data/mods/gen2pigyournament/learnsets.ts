@@ -11231,7 +11231,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		amnesia: ["2T"],
 		ancientpower: ["2T"],
 		barrier: ["2T"],
-		batonbass: ["2T"],
+		batonpass: ["2T"],
 		confuseray: ["2T"],
 		conversion: ["2T"],
 		conversion2: ["2T"],
