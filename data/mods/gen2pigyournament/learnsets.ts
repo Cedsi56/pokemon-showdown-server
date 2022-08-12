@@ -13739,6 +13739,8 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 	smeargle: {
 		learnset: {
 			metronome: ["2T"],
+			explosion: ["2T"],
+			selfdestruct: ["2T"],
 			sketch: ["2T"]
 		}
 	},
