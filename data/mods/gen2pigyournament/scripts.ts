@@ -1,9 +1,8 @@
 /**
- * Gen 2 scripts.
+ * Stadium 2 mechanics inherit from gen 2 mechanics, but fixes some bugs.
  */
-
  export const Scripts: ModdedBattleScriptsData = {
-	inherit: 'gen3',
+	inherit: 'gen2',
 	gen: 2,
 	pokemon: {
 		inherit: true,
@@ -27,14 +26,11 @@
 					stat = Math.floor(stat * numerators[-boost] / 100);
 				}
 			}
-
-			if (this.status === 'par' && statName === 'spe') {
+			if (this.status === 'par' && statName === 'spe' && this.volatiles['parspeeddrop']) {
 				stat = Math.floor(stat / 4);
 			}
-
 			if (!unmodified) {
-				// Burn attack drop is checked when you get the attack stat upon switch in and used until switch out.
-				if (this.status === 'brn' && statName === 'atk') {
+				if (this.status === 'brn' && statName === 'atk' && this.volatiles['brnattackdrop']) {
 					stat = Math.floor(stat / 2);
 				}
 			}
@@ -65,80 +61,10 @@
 
 			return stat;
 		},
-		boostBy(boost) {
-			let delta = 0;
-			let i: BoostID;
-			for (i in boost) {
-				delta = boost[i]!;
-				if (delta > 0 && this.getStat(i as StatIDExceptHP, false, true) === 999) {
-					delta = 0;
-					continue;
-				}
-				this.boosts[i] += delta;
-				if (this.boosts[i] > 6) {
-					delta -= this.boosts[i] - 6;
-					this.boosts[i] = 6;
-				}
-				if (this.boosts[i] < -6) {
-					delta -= this.boosts[i] - (-6);
-					this.boosts[i] = -6;
-				}
-			}
-			return delta;
-		},
 	},
+	// Stadium 2 shares gen 2 code but it fixes some problems with it.
 	actions: {
 		inherit: true,
-		runMove(moveOrMoveName, pokemon, targetLoc, sourceEffect) {
-			let move = this.dex.getActiveMove(moveOrMoveName);
-			let target = this.battle.getTarget(pokemon, move, targetLoc);
-			if (!sourceEffect && move.id !== 'struggle') {
-				const changedMove = this.battle.runEvent('OverrideAction', pokemon, target, move);
-				if (changedMove && changedMove !== true) {
-					move = this.dex.getActiveMove(changedMove);
-					target = this.battle.getRandomTarget(pokemon, move);
-				}
-			}
-			if (!target && target !== false) target = this.battle.getRandomTarget(pokemon, move);
-
-			this.battle.setActiveMove(move, pokemon, target);
-
-			if (pokemon.moveThisTurn) {
-				// THIS IS PURELY A SANITY CHECK
-				// DO NOT TAKE ADVANTAGE OF THIS TO PREVENT A POKEMON FROM MOVING;
-				// USE this.battle.queue.cancelMove INSTEAD
-				this.battle.debug('' + pokemon.fullname + ' INCONSISTENT STATE, ALREADY MOVED: ' + pokemon.moveThisTurn);
-				this.battle.clearActiveMove(true);
-				return;
-			}
-			if (!this.battle.runEvent('BeforeMove', pokemon, target, move)) {
-				this.battle.runEvent('MoveAborted', pokemon, target, move);
-				this.battle.clearActiveMove(true);
-				// This is only run for sleep and fully paralysed.
-				this.battle.runEvent('AfterMoveSelf', pokemon, target, move);
-				return;
-			}
-			if (move.beforeMoveCallback) {
-				if (move.beforeMoveCallback.call(this.battle, pokemon, target, move)) {
-					this.battle.clearActiveMove(true);
-					return;
-				}
-			}
-			pokemon.lastDamage = 0;
-			let lockedMove = this.battle.runEvent('LockMove', pokemon);
-			if (lockedMove === true) lockedMove = false;
-			if (!lockedMove) {
-				if (!pokemon.deductPP(move, null, target) && (move.id !== 'struggle')) {
-					this.battle.add('cant', pokemon, 'nopp', move);
-					this.battle.clearActiveMove(true);
-					return;
-				}
-			}
-			pokemon.moveUsed(move);
-			this.battle.actions.useMove(move, pokemon, target, sourceEffect);
-			this.battle.singleEvent('AfterMove', move, null, pokemon, target, move);
-			if (!move.selfSwitch && pokemon.side.foe.active[0].hp) this.battle.runEvent('AfterMoveSelf', pokemon, target, move);
-		},
 		tryMoveHit(target, pokemon, move) {
 			const positiveBoostTable = [1, 1.33, 1.66, 2, 2.33, 2.66, 3];
 			const negativeBoostTable = [1, 0.75, 0.6, 0.5, 0.43, 0.36, 0.33];
@@ -147,6 +73,15 @@
 
 			if (move.selfdestruct && doSelfDestruct) {
 				this.battle.faint(pokemon, pokemon, move);
+				/**
+				 * Keeping track of the last move used for self-ko clause,
+				 * making sure to clear the opponents last move so that self-destruct and explosion
+				 * does not persist between Pokemon, preventing problems caused by situations,
+				 * such as a player from blowing up both they and their opponents second last Pokemon
+				 * and their opponent blowing up their last Pokemon. If we did not clear here, there would be a problem.
+				 */
+				target.side.lastMove = null;
+				pokemon.side.lastMove = move;
 			}
 
 			let hitResult = this.battle.singleEvent('PrepareHit', move, {}, target, pokemon, move);
@@ -300,185 +235,11 @@
 				this.battle.singleEvent('AfterMoveSecondary', move, null, target, pokemon, move);
 				this.battle.runEvent('AfterMoveSecondary', target, pokemon, move);
 			}
-
-			if (move.recoil && move.totalDamage) {
+			// Implementing Recoil mechanics from Stadium 2.
+			// If a pokemon caused the other to faint with a recoil move and only one pokemon remains on both sides,
+			// recoil damage will not be taken.
+			if (move.recoil && move.totalDamage && (pokemon.side.pokemonLeft > 1 || target.side.pokemonLeft > 1 || target.hp)) {
 				this.battle.damage(this.calcRecoilDamage(move.totalDamage, move), pokemon, target, 'recoil');
-			}
-			return damage;
-		},
-		moveHit(target, pokemon, move, moveData, isSecondary, isSelf) {
-			let damage: number | false | null | undefined = undefined;
-			move = this.dex.getActiveMove(move);
-
-			if (!moveData) moveData = move;
-			let hitResult: boolean | number | null = true;
-
-			if (move.target === 'all' && !isSelf) {
-				hitResult = this.battle.singleEvent('TryHitField', moveData, {}, target, pokemon, move);
-			} else if ((move.target === 'foeSide' || move.target === 'allySide') && !isSelf) {
-				hitResult = this.battle.singleEvent('TryHitSide', moveData, {}, (target ? target.side : null), pokemon, move);
-			} else if (target) {
-				hitResult = this.battle.singleEvent('TryHit', moveData, {}, target, pokemon, move);
-			}
-			if (!hitResult) {
-				if (hitResult === false) this.battle.add('-fail', target);
-				return false;
-			}
-
-			if (target && !isSecondary && !isSelf) {
-				hitResult = this.battle.runEvent('TryPrimaryHit', target, pokemon, moveData);
-				if (hitResult === 0) {
-					// special Substitute flag
-					hitResult = true;
-					target = null;
-				}
-			}
-			if (target && isSecondary && !moveData.self) {
-				hitResult = true;
-			}
-			if (!hitResult) {
-				return false;
-			}
-
-			if (target) {
-				let didSomething: boolean | number | null = false;
-				damage = this.getDamage(pokemon, target, moveData);
-
-				if ((damage || damage === 0) && !target.fainted) {
-					damage = this.battle.damage(damage, target, pokemon, move);
-					if (!(damage || damage === 0)) {
-						this.battle.debug('damage interrupted');
-						return false;
-					}
-					didSomething = true;
-				}
-				if (damage === false || damage === null) {
-					if (damage === false && !isSecondary && !isSelf) {
-						this.battle.add('-fail', target);
-					}
-					this.battle.debug('damage calculation interrupted');
-					return false;
-				}
-
-				if (moveData.boosts && !target.fainted) {
-					if (
-						pokemon.volatiles['lockon'] && target === pokemon.volatiles['lockon'].source &&
-						target.isSemiInvulnerable() && !isSelf
-					) {
-						if (!isSecondary) this.battle.add('-fail', target);
-						return false;
-					}
-					hitResult = this.battle.boost(moveData.boosts, target, pokemon, move);
-					didSomething = didSomething || hitResult;
-				}
-				if (moveData.heal && !target.fainted) {
-					const d = target.heal(Math.round(target.maxhp * moveData.heal[0] / moveData.heal[1]));
-					if (!d && d !== 0) {
-						this.battle.add('-fail', target);
-						this.battle.debug('heal interrupted');
-						return false;
-					}
-					this.battle.add('-heal', target, target.getHealth);
-					didSomething = true;
-				}
-				if (moveData.status) {
-					hitResult = target.trySetStatus(moveData.status, pokemon, move);
-					if (!hitResult && move.status) return hitResult;
-					didSomething = didSomething || hitResult;
-				}
-				if (moveData.forceStatus) {
-					hitResult = target.setStatus(moveData.forceStatus, pokemon, move);
-					didSomething = didSomething || hitResult;
-				}
-				if (moveData.volatileStatus) {
-					hitResult = target.addVolatile(moveData.volatileStatus, pokemon, move);
-					didSomething = didSomething || hitResult;
-				}
-				if (moveData.sideCondition) {
-					hitResult = target.side.addSideCondition(moveData.sideCondition, pokemon, move);
-					didSomething = didSomething || hitResult;
-				}
-				if (moveData.weather) {
-					hitResult = this.battle.field.setWeather(moveData.weather, pokemon, move);
-					didSomething = didSomething || hitResult;
-				}
-				if (moveData.pseudoWeather) {
-					hitResult = this.battle.field.addPseudoWeather(moveData.pseudoWeather, pokemon, move);
-					didSomething = didSomething || hitResult;
-				}
-				if (moveData.forceSwitch) {
-					if (this.battle.canSwitch(target.side)) didSomething = true; // at least defer the fail message to later
-				}
-				if (moveData.selfSwitch) {
-					if (this.battle.canSwitch(pokemon.side)) didSomething = true; // at least defer the fail message to later
-				}
-				// Hit events
-				//   These are like the TryHit events, except we don't need a FieldHit event.
-				//   Scroll up for the TryHit event documentation, and just ignore the "Try" part. ;)
-				hitResult = null;
-				if (move.target === 'all' && !isSelf) {
-					if (moveData.onHitField) hitResult = this.battle.singleEvent('HitField', moveData, {}, target, pokemon, move);
-				} else if ((move.target === 'foeSide' || move.target === 'allySide') && !isSelf) {
-					if (moveData.onHitSide) hitResult = this.battle.singleEvent('HitSide', moveData, {}, target.side, pokemon, move);
-				} else {
-					if (moveData.onHit) hitResult = this.battle.singleEvent('Hit', moveData, {}, target, pokemon, move);
-					if (!isSelf && !isSecondary) {
-						this.battle.runEvent('Hit', target, pokemon, move);
-					}
-					if (moveData.onAfterHit) hitResult = this.battle.singleEvent('AfterHit', moveData, {}, target, pokemon, move);
-				}
-
-				if (!hitResult && !didSomething && !moveData.self && !moveData.selfdestruct) {
-					if (!isSelf && !isSecondary) {
-						if (hitResult === false || didSomething === false) this.battle.add('-fail', target);
-					}
-					this.battle.debug('move failed because it did nothing');
-					return false;
-				}
-			}
-			if (moveData.self) {
-				// This is done solely to mimic in-game RNG behaviour. All self drops have a 100% chance of happening but still grab a random number.
-				if (!isSecondary && moveData.self.boosts) this.battle.random(100);
-				this.moveHit(pokemon, pokemon, move, moveData.self, isSecondary, true);
-			}
-			// Secondary effects don't happen if the target faints from the attack
-			if (target?.hp && moveData.secondaries && this.battle.runEvent('TrySecondaryHit', target, pokemon, moveData)) {
-				for (const secondary of moveData.secondaries) {
-					// We check here whether to negate the probable secondary status if it's burn or freeze.
-					// In the game, this is checked and if true, the random number generator is not called.
-					// That means that a move that does not share the type of the target can status it.
-					// This means tri-attack can burn fire-types and freeze ice-types.
-					// Unlike gen 1, though, paralysis works for all unless the target is immune to direct move (ie. ground-types and t-wave).
-					if (secondary.status && ['brn', 'frz'].includes(secondary.status) && target.hasType(move.type)) {
-						this.battle.debug('Target immune to [' + secondary.status + ']');
-						continue;
-					}
-					// A sleeping or frozen target cannot be flinched in Gen 2; King's Rock is exempt
-					if (secondary.volatileStatus === 'flinch' && ['slp', 'frz'].includes(target.status) && !secondary.kingsrock) {
-						this.battle.debug('Cannot flinch a sleeping or frozen target');
-						continue;
-					}
-					// Multi-hit moves only roll for status once
-					if (!move.multihit || move.lastHit) {
-						const effectChance = Math.floor((secondary.chance || 100) * 255 / 100);
-						if (typeof secondary.chance === 'undefined' || this.battle.randomChance(effectChance, 256)) {
-							this.moveHit(target, pokemon, move, secondary, true, isSelf);
-						} else if (effectChance === 255) {
-							this.battle.hint("In Gen 2, moves with a 100% secondary effect chance will not trigger in 1/256 uses.");
-						}
-					}
-				}
-			}
-			if (target && target.hp > 0 && pokemon.hp > 0 && moveData.forceSwitch && this.battle.canSwitch(target.side)) {
-				hitResult = this.battle.runEvent('DragOut', target, pokemon, move);
-				if (hitResult) {
-					this.dragIn(target.side, target.position);
-				} else if (hitResult === false) {
-					this.battle.add('-fail', target);
-				}
-			}
-			if (move.selfSwitch && pokemon.hp) {
-				pokemon.switchFlag = move.id;
 			}
 			return damage;
 		},
@@ -625,29 +386,9 @@
 				defense = target.getStat(defType, true, true);
 			}
 
-			if (move.id === 'present') {
-				const typeIndexes: {[k: string]: number} = {
-					Normal: 0, Fighting: 1, Flying: 2, Poison: 3, Ground: 4, Rock: 5, Bug: 7, Ghost: 8, Steel: 9,
-					Fire: 20, Water: 21, Grass: 22, Electric: 23, Psychic: 24, Ice: 25, Dragon: 26, Dark: 27,
-				};
-				attack = 10;
-
-				const attackerLastType = attacker.getTypes().slice(-1)[0];
-				const defenderLastType = defender.getTypes().slice(-1)[0];
-
-				defense = typeIndexes[attackerLastType] || 1;
-				level = typeIndexes[defenderLastType] || 1;
-				this.battle.hint("Gen 2 Present has a glitched damage calculation using the secondary types of the Pokemon for the Attacker's Level and Defender's Defense.", true);
-			}
-
-			// When either attack or defense are higher than 256, they are both divided by 4 and modded by 256.
-			// This is what causes the rollover bugs.
 			if (attack >= 256 || defense >= 256) {
-				if (attack >= 1024 || defense >= 1024) {
-					this.battle.hint("In Gen 2, a stat will roll over to a small number if it is larger than 1024.");
-				}
-				attack = this.battle.clampIntRange(Math.floor(attack / 4) % 256, 1);
-				defense = this.battle.clampIntRange(Math.floor(defense / 4) % 256, 1);
+				attack = this.battle.clampIntRange(Math.floor(this.battle.clampIntRange(attack, 1, 999) / 4), 1);
+				defense = this.battle.clampIntRange(Math.floor(this.battle.clampIntRange(defense, 1, 999) / 4), 1);
 			}
 
 			// Self destruct moves halve defense at this point.
@@ -720,5 +461,124 @@
 			// We are done, this is the final damage
 			return damage;
 		},
+	},
+	/**
+	 * Stadium 2 ignores stat drops due to status ailments upon boosting the dropped stat.
+	 * For example: if a burned Snorlax uses Curse then it will ignore the attack drop from
+	 * burn when it is recalculating its attack stat. This is why volatiles are added to status
+	 * conditions, so that we can keep track of whether or not to apply the stat drop from
+	 * statuses.
+	 */
+	boost(boost, target, source = null, effect = null) {
+		if (this.event) {
+			if (!target) target = this.event.target;
+			if (!source) source = this.event.source;
+			if (!effect) effect = this.effect;
+		}
+		if (typeof effect === 'string') effect = this.dex.conditions.get(effect);
+		if (!target?.hp) return 0;
+		let success = null;
+		boost = this.runEvent('Boost', target, source, effect, {...boost});
+		let i: BoostID;
+		for (i in boost) {
+			const currentBoost: SparseBoostsTable = {};
+			currentBoost[i] = boost[i];
+			let boostBy = target.boostBy(currentBoost);
+			let msg = '-boost';
+			if (boost[i]! < 0) {
+				msg = '-unboost';
+				boostBy = -boostBy;
+			}
+			if (boostBy) {
+				success = true;
+				// Check for boost increases deleting attack or speed drops
+				if (i === 'atk' && target.status === 'brn' && target.volatiles['brnattackdrop']) {
+					target.removeVolatile('brnattackdrop');
+				}
+				if (i === 'spe' && target.status === 'par' && target.volatiles['parspeeddrop']) {
+					target.removeVolatile('parspeeddrop');
+				}
+				if (!effect || effect.effectType === 'Move') {
+					this.add(msg, target, i, boostBy);
+				} else {
+					this.add(msg, target, i, boostBy, '[from] ' + effect.fullname);
+				}
+				this.runEvent('AfterEachBoost', target, source, effect, currentBoost);
+			}
+		}
+		this.runEvent('AfterBoost', target, source, effect, boost);
+		return success;
+	},
+	/**
+	 * Implementing Self-KO Clause by having it check what the last move used by the players were
+	 * in the case both Pokemon faint. Since the only way this can happen in Stadium 2 is if a player
+	 * uses self-destruct or explosion, I can use this to determine who should win.
+	 */
+	faintMessages(lastFirst) {
+		if (this.ended) return;
+		const length = this.faintQueue.length;
+		if (!length) return false;
+		if (lastFirst) {
+			this.faintQueue.unshift(this.faintQueue[this.faintQueue.length - 1]);
+			this.faintQueue.pop();
+		}
+		let faintData;
+		while (this.faintQueue.length) {
+			faintData = this.faintQueue.shift()!;
+			const pokemon: Pokemon = faintData.target;
+			if (!pokemon.fainted &&
+				this.runEvent('BeforeFaint', pokemon, faintData.source, faintData.effect)) {
+				this.add('faint', pokemon);
+				pokemon.side.pokemonLeft--;
+				this.runEvent('Faint', pokemon, faintData.source, faintData.effect);
+				this.singleEvent('End', pokemon.getAbility(), pokemon.abilityState, pokemon);
+				pokemon.clearVolatile(false);
+				pokemon.fainted = true;
+				pokemon.isActive = false;
+				pokemon.isStarted = false;
+				pokemon.side.faintedThisTurn = pokemon;
+			}
+		}
+
+		if (this.gen <= 1) {
+			// in gen 1, fainting skips the rest of the turn
+			// residuals don't exist in gen 1
+			this.queue.clear();
+		} else if (this.gen <= 3 && this.gameType === 'singles') {
+			// in gen 3 or earlier, fainting in singles skips to residuals
+			for (const pokemon of this.getAllActive()) {
+				if (this.gen <= 2) {
+					// in gen 2, fainting skips moves only
+					this.queue.cancelMove(pokemon);
+				} else {
+					// in gen 3, fainting skips all moves and switches
+					this.queue.cancelAction(pokemon);
+				}
+			}
+		}
+
+		if (!this.p1.pokemonLeft && !this.p2.pokemonLeft) {
+			if (this.p1.lastMove !== null && this.p2.lastMove === null) {
+				this.win(this.p2);
+				return true;
+			} else if (this.p2.lastMove !== null && this.p1.lastMove === null) {
+				this.win(this.p1);
+				return true;
+			}
+			this.win(faintData ? faintData.target.side.foe : null);
+			return true;
+		}
+		if (!this.p1.pokemonLeft) {
+			this.win(this.p2);
+			return true;
+		}
+		if (!this.p2.pokemonLeft) {
+			this.win(this.p1);
+			return true;
+		}
+		if (faintData) {
+			this.runEvent('AfterFaint', faintData.target, faintData.source, faintData.effect, length);
+		}
+		return false;
 	},
 };
