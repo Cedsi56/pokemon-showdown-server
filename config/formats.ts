@@ -27,7 +27,7 @@ let Formats: FormatList = [
 
 		mod: 'gen2pigyournament',
 
-		ruleset: ['Sleep Clause Mod', 'Obtainable', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
+		ruleset: ['Standard', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
 		banlist: [
 			// Tier
 			'Uber',
@@ -67,8 +67,7 @@ let Formats: FormatList = [
 		mod: 'gen2pigyournament',
 		searchShow: true,
 		ruleset: [
-			'Picked Team Size = 3', 'Min Level = 50', 'Max Level = 55', 'Max Total Level = 155',
-			'Obtainable', 'Stadium Sleep Clause', 'Freeze Clause Mod', 'Species Clause', 'Item Clause', 'Endless Battle Clause', 'Cancel Mod', 'Team Preview',
+			'Standard', 'Picked Team Size = 3', 'Min Level = 50', 'Max Level = 55', 'Max Total Level = 155',
 		],
 		banlist: [
 			// Tier
