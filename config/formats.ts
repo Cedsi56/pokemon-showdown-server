@@ -52,7 +52,7 @@ let Formats: FormatList = [
 		],
 	},
 
-{
+	{
 		name: "[Gen 2] Pigyournament LC Beta",
 	
 		mod: 'gen2pigyournament',
@@ -65,7 +65,7 @@ let Formats: FormatList = [
 		name: "[Gen 2] Pigyournament Prime Cup",
 
 		mod: 'gen2pigyournament',
-		searchShow: false,
+		searchShow: true,
 		ruleset: [
 			'Picked Team Size = 3', 'Min Level = 50', 'Max Level = 55', 'Max Total Level = 155',
 			'Obtainable', 'Stadium Sleep Clause', 'Freeze Clause Mod', 'Species Clause', 'Item Clause', 'Endless Battle Clause', 'Cancel Mod', 'Team Preview',
