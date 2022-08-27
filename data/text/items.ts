@@ -1077,7 +1077,8 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Metal Powder",
 		desc: "If held by a Ditto that hasn't Transformed, its Defense is doubled.",
 		gen2: {
-			desc: "If held by a Ditto, its Defense and Sp. Def are 1.5x, even while Transformed.",
+			desc: "If held by a Ditto, its Defense and Sp. Def are 1.5x. In Stadium 2, this effect is disabled while transformed.",
+			shortDesc: "If held by a Ditto, its Defense and Sp. Def are 1.5x.",
 		},
 	},
 	metronome: {
