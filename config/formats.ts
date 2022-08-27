@@ -41,7 +41,7 @@ let Formats: FormatList = [
 		name: "[Gen 2] Pigyournament 6v6",
 
 		mod: 'gen2pigyournament',
-		ruleset: ['Sleep Clause Mod', 'Obtainable', 'Item Clause', 'Evasion Moves Clause', 'Team Preview', 'Cancel Mod', 'Freeze Clause Mod', 'Species Clause', 'Adjust Level = 50'],
+		ruleset: ['Standard', 'Adjust Level = 50'],
 		banlist: [
 			// Tier
 			'Uber',
