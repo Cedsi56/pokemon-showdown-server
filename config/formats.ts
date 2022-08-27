@@ -60,6 +60,27 @@ let Formats: FormatList = [
 		banlist: ['Gligar', 'Misdreavus', 'Scyther', 'Sneasel', 'Tangela', 'Chansey', 'Gold Berry', 'Abra', 'Houndour' , 'Dragon Rage', 'Sonic Boom'],
 	},
 
+
+	{
+		name: "[Gen 2] Pigyournament Prime Cup",
+
+		mod: 'gen2pigyournament',
+		searchShow: false,
+		ruleset: [
+			'Picked Team Size = 3', 'Min Level = 50', 'Max Level = 55', 'Max Total Level = 155',
+			'Obtainable', 'Stadium Sleep Clause', 'Freeze Clause Mod', 'Species Clause', 'Item Clause', 'Endless Battle Clause', 'Cancel Mod', 'Team Preview',
+		],
+		banlist: [
+			// Tier
+			'Uber',
+			// Moves
+			'Rest', 'Sing', 'Spore', 'Hypnosis', 'Sleep Powder', 'Lovely Kiss', 'Mean Look',
+			// Items
+			'Brightpowder'
+		],
+	},
+
+
 	// Sw/Sh Singles
 	///////////////////////////////////////////////////////////////////
 
