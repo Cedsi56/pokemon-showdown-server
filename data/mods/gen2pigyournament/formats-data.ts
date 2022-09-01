@@ -537,7 +537,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	umbreon: {
 		randomBattleMoves: ["batonpass", "growth", "hiddenpowerdark", "meanlook", "moonlight"],
-		tier: "UUBL",
+		tier: "Uber",
 	},
 	porygon: {
 		tier: "LC",

@@ -62,7 +62,7 @@ let Formats: FormatList = [
 
 
 	{
-		name: "[Gen 2] Pigyournament Prime Cup",
+		name: "[Gen 2] Pigyournament Poké Cup",
 
 		mod: 'gen2pigyournament',
 		searchShow: true,
