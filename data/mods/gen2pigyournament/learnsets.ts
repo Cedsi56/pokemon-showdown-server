@@ -12070,6 +12070,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			teleport: ["2T"],
 			mimic: ["2T"],
 			metronome: ["2T"],
+			selfdestruct: ["2T"],
 			explosion: ["2T"],
 			spite: ["2T"],
 			destinybond: ["2T"],
@@ -12276,6 +12277,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			defensecurl: ["2T"],
 			bide: ["2T"],
 			metronome: ["2T"],
+			selfdestruct: ["2T"],
 			waterfall: ["2T"],
 			glare: ["2T"],
 			dreameater: ["2T"],
@@ -12578,6 +12580,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			confuseray: ["2T"],
 			defensecurl: ["2T"],
 			haze: ["2T"],
+			selfdestruct: ["2T"],
 			sludge: ["2T"],
 			waterfall: ["2T"],
 			swift: ["2T"],
@@ -12686,6 +12689,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			defensecurl: ["2T"],
 			focusenergy: ["2T"],
 			bide: ["2T"],
+			selfdestruct: ["2T"],
 			sludge: ["2T"],
 			constrict: ["2T"],
 			poisongas: ["2T"],
@@ -12995,6 +12999,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			batonpass: ["2T"],
 			hiddenpower: ["2T"],
 			sunnyday: ["2T"],
+			ancientpower: ["2T"],
 			rocksmash: ["2T"]
 		}
 	},
@@ -13039,6 +13044,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			batonpass: ["2T"],
 			hiddenpower: ["2T"],
 			sunnyday: ["2T"],
+			ancientpower: ["2T"],
 			rocksmash: ["2T"]
 		}
 	},
@@ -13195,6 +13201,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			confuseray: ["2T"],
 			defensecurl: ["2T"],
 			barrier: ["2T"],
+			selfdestruct: ["2T"],
 			waterfall: ["2T"],
 			spikecannon: ["2T"],
 			amnesia: ["2T"],
@@ -13348,6 +13355,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			doubleteam: ["2T"],
 			metronome: ["2T"],
 			mirrormove: ["2T"],
+			selfdestruct: ["2T"],
 			eggbomb: ["2T"],
 			swift: ["2T"],
 			softboiled: ["2T"],
