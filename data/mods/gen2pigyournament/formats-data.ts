@@ -892,4 +892,8 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		randomBattleMoves: ["gigadrain", "healbell", "leechseed", "psychic", "recover", "toxic"],
 		tier: "Uber",
 	},
+	blaziken: {
+		randomBattleMoves: ["firepunch", "crosschop", "rockslide", "earthquake"],
+		tier: "OU",
+	},
 };
