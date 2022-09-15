@@ -894,6 +894,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	},
 	blaziken: {
 		randomBattleMoves: ["firepunch", "crosschop", "rockslide", "earthquake"],
+		isNonstandard: null,
 		tier: "OU",
 	},
 };
