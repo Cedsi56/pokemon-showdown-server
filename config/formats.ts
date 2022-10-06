@@ -32,9 +32,9 @@ let Formats: FormatList = [
 			// Tier
 			'Uber',
 			// Moves
-			'Rest', 'Sing', 'Spore', 'Hypnosis', 'Sleep Powder', 'Lovely Kiss', 'Mean Look',
+			'Rest', 'Sing', 'Spore', 'Hypnosis', 'Sleep Powder', 'Lovely Kiss', 'Mean Look', 'Explosion', 'Selfdestruct', 'Destiny Bond', 'Guillotine', 'Fissure', 'Horn Drill',
 			// Items
-			'Brightpowder'
+			'Brightpowder', 'Scope Lens', 'Focus Band'
 		],
 	},
 	{
