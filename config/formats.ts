@@ -79,6 +79,20 @@ let Formats: FormatList = [
 		],
 	},
 
+	{
+		name: "[Gen 2] Pigyournament Ubers",
+
+		mod: 'gen2pigyournament',
+
+		ruleset: ['Standard', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
+		banlist: [
+			// Moves
+			'Rest', 'Sing', 'Spore', 'Hypnosis', 'Sleep Powder', 'Lovely Kiss', 'Mean Look', 'Explosion', 'Selfdestruct', 'Destiny Bond', 'Guillotine', 'Fissure', 'Horn Drill',
+			// Items
+			'Brightpowder', 'Scope Lens', 'Focus Band'
+		],
+	},
+
 
 	{
 		name: "[Gen 2] Pigyournament 100 dollars",
