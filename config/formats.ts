@@ -80,6 +80,47 @@ let Formats: FormatList = [
 	},
 
 
+	{
+		name: "[Gen 2] Pigyournament 100 dollars",
+
+		mod: 'gen2pigyournament',
+
+		ruleset: ['Standard', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
+		banlist: [
+			// Tier
+			'Uber',
+			// Moves
+			'Rest', 'Sing', 'Spore', 'Hypnosis', 'Sleep Powder', 'Lovely Kiss', 'Mean Look',
+			// Items
+			'Brightpowder'
+		],
+		onValidateTeam(team) {
+			let value = 0;
+			for (const set of team) {
+				let species = this.dex.species.get(set.species);
+				if (['ou'].includes(this.toID(species.tier))) {
+					value += 40
+				} else if (['uubl'].includes(this.toID(species.tier))) {
+					value += 30
+				} else if (['uu'].includes(this.toID(species.tier))) {
+					value += 25
+				} else if (['rubl'].includes(this.toID(species.tier))) {
+					value += 20
+				} else if (['ru'].includes(this.toID(species.tier))) {
+					value += 15
+				} else if (['nubl'].includes(this.toID(species.tier))) {
+					value += 10
+				} else if (['nu'].includes(this.toID(species.tier)) || ['nfe'].includes(this.toID(species.tier)) || ['lc'].includes(this.toID(species.tier))) {
+					value += 5
+				}
+			}
+			if (value > 100) {
+				return [`Your team is too expensive.`, `It costs $${value}.`];
+			}
+		}
+	},
+
+
 	// Sw/Sh Singles
 	///////////////////////////////////////////////////////////////////
 
