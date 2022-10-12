@@ -85,7 +85,7 @@ let Formats: FormatList = [
 
 		mod: 'gen2pigyournament',
 
-		ruleset: ['Standard', 'Adjust Level = 50', 'Picked Team Size = 3', 'Max Team Size = 6'],
+		ruleset: ['Standard', 'Adjust Level = 50', 'Picked Team Size = 3', 'Min Team Size = 6', 'Max Team Size = 6'],
 		banlist: [
 			// Tier
 			'Uber',
