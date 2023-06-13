@@ -135,7 +135,7 @@ let Formats: FormatList = [
 	},
 
 	{
-		name: "[Gen 6] Pigyournament Random Battle",
+		name: "[Gen 2] Pigyournament Random Battle",
 		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
 
 		mod: 'gen2pigyournament',
