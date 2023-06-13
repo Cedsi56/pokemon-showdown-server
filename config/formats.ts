@@ -138,7 +138,7 @@ let Formats: FormatList = [
 		name: "Pigyournament Random Battle",
 		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
 
-		mod: 'pigyournament',
+		mod: 'gen2pigyournament',
 		team: 'random',
 		ruleset: ['Obtainable', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
 	},
