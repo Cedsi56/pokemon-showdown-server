@@ -640,7 +640,7 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "LC",
 	},
 	ledian: {
-		randomBattleMoves: ["agility", "barrier", "batonpass", "lightscreen", "destinybond", "lovelykiss"],
+		randomBattleMoves: ["agility", "batonpass", "lightscreen", "lovelykiss"],
 		tier: "NU",
 	},
 	spinarak: {
