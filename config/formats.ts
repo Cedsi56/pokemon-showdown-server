@@ -53,7 +53,7 @@ let Formats: FormatList = [
 	},
 
 	{
-		name: "[Gen 2] Pigyournament LC Beta",
+		name: "[Gen 2] Pigyournament LC",
 	
 		mod: 'gen2pigyournament',
 		ruleset: ['Standard', 'Little Cup'],
