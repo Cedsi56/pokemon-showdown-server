@@ -56,7 +56,7 @@ let Formats: FormatList = [
 		name: "[Gen 2] Pigyournament LC Beta",
 	
 		mod: 'gen2pigyournament',
-		ruleset: ['Standard', 'Little Cup', 'Freeze Clause Mod'],
+		ruleset: ['Standard', 'Little Cup'],
 		banlist: ['Gligar', 'Misdreavus', 'Scyther', 'Sneasel', 'Tangela', 'Chansey', 'Gold Berry', 'Abra', 'Houndour' , 'Dragon Rage', 'Sonic Boom'],
 	},
 
