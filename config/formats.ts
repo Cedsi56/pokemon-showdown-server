@@ -110,51 +110,34 @@ let Formats: FormatList = [
 		],
 		onValidateTeam(team) {
 			let value = 0;
+			let vals = [];
+			let curval = 0;
 			for (const set of team) {
 				let species = this.dex.species.get(set.species);
 				if (['ou'].includes(this.toID(species.tier))) {
-					value += 40
+					curval = 40
 				} else if (['uubl'].includes(this.toID(species.tier))) {
-					value += 30
+					curval = 30
 				} else if (['uu'].includes(this.toID(species.tier))) {
-					value += 25
+					curval = 25
 				} else if (['rubl'].includes(this.toID(species.tier))) {
-					value += 20
+					curval = 20
 				} else if (['ru'].includes(this.toID(species.tier))) {
-					value += 15
+					curval = 15
 				} else if (['nubl'].includes(this.toID(species.tier))) {
-					value += 10
+					curval = 10
 				} else if (['nu'].includes(this.toID(species.tier)) || ['nfe'].includes(this.toID(species.tier)) || ['lc'].includes(this.toID(species.tier))) {
-					value += 5
+					curval = 5
 				}
+				value += curval
+				vals.push(`${set.species} is worth $${curval}.`)
 			}
 			if (value > 100) {
-				return [`Your team is too expensive. It costs $${value}.`];
+				return [`Your team is too expensive. It costs $${value}.`].concat(vals);
+			} else if (value < 100 && team.length < 6) {
+				return [`It currently costs $${value}.`].concat(vals);
 			}
-		},
-		onModifySpecies(species, target, source, effect) {
-			let value = 0;
-			if (['ou'].includes(this.toID(species.tier))) {
-				value = 40
-			} else if (['uubl'].includes(this.toID(species.tier))) {
-				value = 30
-			} else if (['uu'].includes(this.toID(species.tier))) {
-				value = 25
-			} else if (['rubl'].includes(this.toID(species.tier))) {
-				value = 20
-			} else if (['ru'].includes(this.toID(species.tier))) {
-				value = 15
-			} else if (['nubl'].includes(this.toID(species.tier))) {
-				value = 10
-			} else if (['nu'].includes(this.toID(species.tier)) || ['nfe'].includes(this.toID(species.tier)) || ['lc'].includes(this.toID(species.tier))) {
-				value = 5
-			}
-
-			if (target != undefined){
-				target.set.name = "$" + value.toString();
-			}
-			
-		},
+		}
 	},
 
 	{
