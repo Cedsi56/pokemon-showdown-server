@@ -129,9 +129,32 @@ let Formats: FormatList = [
 				}
 			}
 			if (value > 100) {
-				return [`Your team is too expensive.`, `It costs $${value}.`];
+				return [`Your team is too expensive. It costs $${value}.`];
 			}
-		}
+		},
+		onModifySpecies(species, target, source, effect) {
+			let value = 0;
+			if (['ou'].includes(this.toID(species.tier))) {
+				value = 40
+			} else if (['uubl'].includes(this.toID(species.tier))) {
+				value = 30
+			} else if (['uu'].includes(this.toID(species.tier))) {
+				value = 25
+			} else if (['rubl'].includes(this.toID(species.tier))) {
+				value = 20
+			} else if (['ru'].includes(this.toID(species.tier))) {
+				value = 15
+			} else if (['nubl'].includes(this.toID(species.tier))) {
+				value = 10
+			} else if (['nu'].includes(this.toID(species.tier)) || ['nfe'].includes(this.toID(species.tier)) || ['lc'].includes(this.toID(species.tier))) {
+				value = 5
+			}
+
+			if (target != undefined){
+				target.set.name = "$" + value.toString();
+			}
+			
+		},
 	},
 
 	{
