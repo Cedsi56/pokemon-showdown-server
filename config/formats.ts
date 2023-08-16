@@ -134,7 +134,7 @@ let Formats: FormatList = [
 			}
 			if (value > 100) {
 				return [`Your team is too expensive. It costs $${value}.`].concat(vals);
-			} else if (value < 100 && team.length < 6) {
+			} else if (team.length < 6) {
 				return [`It currently costs $${value}.`].concat(vals);
 			}
 		}
