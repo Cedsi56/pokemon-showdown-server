@@ -4023,7 +4023,6 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			firepunch: ["2T"],
 			icepunch: ["2T"],
 			thunderpunch: ["2T"],
-			swordsdance: ["2T"],
 			doublekick: ["2T"],
 			megakick: ["2T"],
 			rollingkick: ["2T"],
@@ -4091,7 +4090,6 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			firepunch: ["2T"],
 			icepunch: ["2T"],
 			thunderpunch: ["2T"],
-			swordsdance: ["2T"],
 			doublekick: ["2T"],
 			megakick: ["2T"],
 			rollingkick: ["2T"],
@@ -5159,7 +5157,6 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 	},
 	doduo: {
 		learnset: {
-			swordsdance: ["2T"],
 			whirlwind: ["2T"],
 			fly: ["2T"],
 			stomp: ["2T"],
