@@ -1133,7 +1133,8 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			frustration: ["2T"],
 			pursuit: ["2T"],
 			hiddenpower: ["2T"],
-			sunnyday: ["2T"]
+			sunnyday: ["2T"],
+			swordsdance: ["2T"]
 		}
 	},
 	ekans: {
@@ -4158,7 +4159,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			firepunch: ["2T"],
 			icepunch: ["2T"],
 			thunderpunch: ["2T"],
-			swordsdance: ["2T"],
+			machpunch: ["2T"],
 			doublekick: ["2T"],
 			megakick: ["2T"],
 			rollingkick: ["2T"],
@@ -5212,7 +5213,6 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 	},
 	dodrio: {
 		learnset: {
-			swordsdance: ["2T"],
 			whirlwind: ["2T"],
 			fly: ["2T"],
 			stomp: ["2T"],
@@ -11658,7 +11658,9 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			ancientpower: ["2T"],
 			shadowball: ["2T"],
 			rocksmash: ["2T"],
-			beatup: ["2T"]
+			beatup: ["2T"],
+			lovelykiss: ["2T"],
+			falseswipe: ["2T"]
 		}
 	},
 	sunkern: {
@@ -13212,7 +13214,8 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			sunnyday: ["2T"],
 			crunch: ["2T"],
 			shadowball: ["2T"],
-			rocksmash: ["2T"]
+			rocksmash: ["2T"],
+			swordsdance: ["2T"]
 		}
 	},
 	slugma: {
