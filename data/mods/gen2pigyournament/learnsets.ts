@@ -1030,6 +1030,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		learnset: {
 			payday: ["2T"],
 			razorwind: ["2T"],
+			swordsdance: ["2T"],
 			wingattack: ["2T"],
 			whirlwind: ["2T"],
 			fly: ["2T"],
@@ -1083,6 +1084,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		learnset: {
 			payday: ["2T"],
 			razorwind: ["2T"],
+			swordsdance: ["2T"],
 			wingattack: ["2T"],
 			whirlwind: ["2T"],
 			fly: ["2T"],
@@ -1133,8 +1135,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			frustration: ["2T"],
 			pursuit: ["2T"],
 			hiddenpower: ["2T"],
-			sunnyday: ["2T"],
-			swordsdance: ["2T"]
+			sunnyday: ["2T"]
 		}
 	},
 	ekans: {
@@ -4061,6 +4062,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			snore: ["2T"],
 			curse: ["2T"],
 			protect: ["2T"],
+			machpunch: ["2T"],
 			scaryface: ["2T"],
 			mudslap: ["2T"],
 			foresight: ["2T"],
@@ -4128,6 +4130,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			snore: ["2T"],
 			curse: ["2T"],
 			protect: ["2T"],
+			machpunch: ["2T"],
 			scaryface: ["2T"],
 			mudslap: ["2T"],
 			foresight: ["2T"],
@@ -4157,7 +4160,6 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			firepunch: ["2T"],
 			icepunch: ["2T"],
 			thunderpunch: ["2T"],
-			machpunch: ["2T"],
 			doublekick: ["2T"],
 			megakick: ["2T"],
 			rollingkick: ["2T"],
@@ -4197,6 +4199,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			snore: ["2T"],
 			curse: ["2T"],
 			protect: ["2T"],
+			machpunch: ["2T"],
 			scaryface: ["2T"],
 			mudslap: ["2T"],
 			foresight: ["2T"],
@@ -10864,6 +10867,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 	natu: {
 		learnset: {
 			payday: ["2T"],
+			whirlwind: ["2T"],
 			leer: ["2T"],
 			disable: ["2T"],
 			peck: ["2T"],
@@ -10921,6 +10925,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 		learnset: {
 			payday: ["2T"],
 			firepunch: ["2T"],
+			whirlwind: ["2T"],
 			fly: ["2T"],
 			leer: ["2T"],
 			disable: ["2T"],
@@ -11622,6 +11627,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			glare: ["2T"],
 			dreameater: ["2T"],
 			barrage: ["2T"],
+			lovelykiss: ["2T"],
 			dizzypunch: ["2T"],
 			furyswipes: ["2T"],
 			rest: ["2T"],
@@ -11638,6 +11644,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			detect: ["2T"],
 			endure: ["2T"],
 			rollout: ["2T"],
+			falseswipe: ["2T"],
 			swagger: ["2T"],
 			furycutter: ["2T"],
 			meanlook: ["2T"],
@@ -11655,9 +11662,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			ancientpower: ["2T"],
 			shadowball: ["2T"],
 			rocksmash: ["2T"],
-			beatup: ["2T"],
-			lovelykiss: ["2T"],
-			falseswipe: ["2T"]
+			beatup: ["2T"]
 		}
 	},
 	sunkern: {
@@ -13161,6 +13166,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			icepunch: ["2T"],
 			thunderpunch: ["2T"],
 			scratch: ["2T"],
+			swordsdance: ["2T"],
 			cut: ["2T"],
 			doublekick: ["2T"],
 			headbutt: ["2T"],
@@ -13211,8 +13217,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			sunnyday: ["2T"],
 			crunch: ["2T"],
 			shadowball: ["2T"],
-			rocksmash: ["2T"],
-			swordsdance: ["2T"]
+			rocksmash: ["2T"]
 		}
 	},
 	slugma: {
@@ -13361,6 +13366,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			present: ["2T"],
 			frustration: ["2T"],
 			magnitude: ["2T"],
+			sweetscent: ["2T"],
 			vitalthrow: ["2T"],
 			hiddenpower: ["2T"],
 			raindance: ["2T"],
@@ -13429,6 +13435,7 @@ export const Learnsets: {[k: string]: ModdedLearnsetData} = {
 			frustration: ["2T"],
 			magnitude: ["2T"],
 			megahorn: ["2T"],
+			sweetscent: ["2T"],
 			vitalthrow: ["2T"],
 			hiddenpower: ["2T"],
 			raindance: ["2T"],
