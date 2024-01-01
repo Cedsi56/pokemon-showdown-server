@@ -38,7 +38,7 @@ let Formats: FormatList = [
 		],
 	},
 	{
-		name: "[Gen 2] Miltankless",
+		name: "[Gen 2] Pigyournament Miltankless",
 
 		mod: 'gen2pigyournament',
 
